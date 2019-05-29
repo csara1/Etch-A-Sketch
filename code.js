@@ -1,9 +1,9 @@
-var onresize = function() {
-  width = window.outerWidth;
-  height = window.outerHeight;
-  document.querySelector('div').innerText = width + ' x ' + height; 
+function onresize() {
+  side = Math.min(window.innerWidth, window.innerHeight)+"px";
+  container.style.width = container.style.height = side;
 }
-width = window.outerWidth;
-height = window.outerHeight;
-document.querySelector('div').innerText = width + ' x ' + height; 
+
+let container = document.getElementById('container'),
+    side = Math.min(window.innerWidth, window.innerHeight)+"px";
+container.style.width = container.style.height = side;
 window.addEventListener("resize", onresize);
