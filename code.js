@@ -7,14 +7,21 @@ function positionContainer() {
 }
 
 function onmouseover(event) {
-    let item = event.target;
-    if(window.getComputedStyle(item).backgroundColor == "rgb(255, 255, 255)") {
-        let red = Math.floor(Math.random() * 256),
-            green = Math.floor(Math.random() * 256),
-            blue = Math.floor(Math.random() * 256);
-        item.style.backgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
-        item.style.borderColor = "rgb(" + (255-red) + "," + (255-green) + "," + (255-blue) + ")";
+    let item = event.target,
+        itemNumber = parseInt(item.id),
+        itemPass = pass[itemNumber]++;
+    if(itemPass > 10) {
+        return;
     }
+    let redStep = initRed[itemNumber]/10,
+        greenStep = initGreen[itemNumber]/10,
+        blueStep = initBlue[itemNumber]/10,
+        red = (10-itemPass) * redStep,
+        green = (10-itemPass) * greenStep,
+        blue = (10-itemPass) * blueStep,
+        itemStyle = item.style;
+    itemStyle.backgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
+    itemStyle.borderColor = "rgb(" + (255-red) + "," + (255-green) + "," + (255-blue) + ")";
 }
 
 function addSquares() {
@@ -26,7 +33,10 @@ function addSquares() {
         item.id = i;
         item.addEventListener("mouseover", onmouseover);
         container.appendChild(item);
-        redDecrement[i] = greenDecrement[i] = blueDecrement[i] = 255;
+        pass[i] = 0;
+        initRed[i] = Math.floor(Math.random() * 256);
+        initGreen[i] = Math.floor(Math.random() * 256);
+        initBlue[i] = Math.floor(Math.random() * 256);
     }    
 }
 
@@ -42,7 +52,10 @@ function reset() {
         squaresPerSide = parseInt(window.prompt("Squares per side (1..." + maxSquaresPerSide + "): ", "16"));
     } while (squaresPerSide <= 0 || squaresPerSide > maxSquaresPerSide);
     
-    redDecrement = greenDecrement = blueDecrement = new Array(squaresPerSide*squaresPerSide);
+    initRed = new Array(squaresPerSide*squaresPerSide);
+    initGreen = new Array(squaresPerSide*squaresPerSide);
+    initBlue = new Array(squaresPerSide*squaresPerSide);
+    pass = new Array(squaresPerSide*squaresPerSide);
     addSquares();
 }
 
@@ -51,7 +64,10 @@ let button = document.getElementById('reset'),
     containerStyle = container.style,
     side = 0,
     squaresPerSide = 16
-    redDecrement = greenDecrement = blueDecrement = new Array(squaresPerSide*squaresPerSide);
+    initRed = new Array(squaresPerSide*squaresPerSide);
+    initGreen = new Array(squaresPerSide*squaresPerSide);
+    initBlue = new Array(squaresPerSide*squaresPerSide);
+    pass = new Array(squaresPerSide*squaresPerSide);
 
 positionContainer();
 button.addEventListener("click", reset);
