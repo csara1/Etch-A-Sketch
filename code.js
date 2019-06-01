@@ -10,15 +10,15 @@ function onmouseover(event) {
     let item = event.target,
         itemNumber = parseInt(item.id),
         itemPass = pass[itemNumber]++;
-    if(itemPass > 10) {
+    if(itemPass > 9) {
         return;
     }
-    let redStep = initRed[itemNumber]/10,
-        greenStep = initGreen[itemNumber]/10,
-        blueStep = initBlue[itemNumber]/10,
-        red = (10-itemPass) * redStep,
-        green = (10-itemPass) * greenStep,
-        blue = (10-itemPass) * blueStep,
+    let redStep = initRed[itemNumber]/9,
+        greenStep = initGreen[itemNumber]/9,
+        blueStep = initBlue[itemNumber]/9,
+        red = (9-itemPass) * redStep,
+        green = (9-itemPass) * greenStep,
+        blue = (9-itemPass) * blueStep,
         itemStyle = item.style;
     itemStyle.backgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
     itemStyle.borderColor = "rgb(" + (255-red) + "," + (255-green) + "," + (255-blue) + ")";
