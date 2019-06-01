@@ -9,8 +9,11 @@ function positionContainer() {
 function onmouseover(event) {
     let item = event.target;
     if(window.getComputedStyle(item).backgroundColor == "rgb(255, 255, 255)") {
-        item.style.backgroundColor = "rgb(0,0,0)";
-        item.style.borderColor = "white";
+        let red = Math.floor(Math.random() * 256),
+            green = Math.floor(Math.random() * 256),
+            blue = Math.floor(Math.random() * 256);
+        item.style.backgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
+        item.style.borderColor = "rgb(" + (255-red) + "," + (255-green) + "," + (255-blue) + ")";
     }
 }
 
