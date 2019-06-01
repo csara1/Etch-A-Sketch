@@ -10,14 +10,7 @@ body {
     display: grid;
 }
 
-.even {
+.item {
     background-color: black;
-}
-
-.odd {
-    background-color: white;
-}
-
-.even, .odd {
-    border: 1px solid black;
+    border: 1px solid white;
 }

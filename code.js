@@ -1,6 +1,12 @@
 function onresize() {
-  side = Math.min(window.innerWidth, window.innerHeight) + "px";
-  containerStyle.width = containerStyle.height = side;
+    side = Math.min(window.innerWidth, window.innerHeight) + "px";
+    containerStyle.width = containerStyle.height = side;
+}
+
+function onmouseover(event) {
+    let itemStyle = event.target.style;
+    itemStyle.backgroundColor = "white";
+    itemStyle.borderColor = "black";
 }
 
 let container = document.getElementById('container'),
@@ -13,9 +19,12 @@ window.addEventListener("resize", onresize);
 
 containerStyle.gridTemplateColumns = "repeat(" + squaresPerSide + ", 1fr)";
 containerStyle.gridTemplateRows = "repeat(" + squaresPerSide + ", 1fr)";
-for(i=0; i<squaresPerSide; i++) {
-    for(j=0; j<squaresPerSide; j++) {
-        container.innerHTML += (i+j)&1 ? '<div class="odd"></div>'
-                                      : '<div class="even"></div>';
-    }
+
+for(i=0; i<squaresPerSide*squaresPerSide; i++) {
+    container.innerHTML += '<div class="item" id="item' + i + '"></div>';
+}
+
+for(i=0; i<squaresPerSide*squaresPerSide; i++) {
+  let item = document.getElementById('item' + i);
+  item.addEventListener("mouseover", onmouseover);
 }
