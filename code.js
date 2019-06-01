@@ -7,9 +7,11 @@ function positionContainer() {
 }
 
 function onmouseover(event) {
-    let itemStyle = event.target.style;
-    itemStyle.backgroundColor = "white";
-    itemStyle.borderColor = "black";
+    let item = event.target;
+    if(window.getComputedStyle(item).backgroundColor == "rgb(255, 255, 255)") {
+        item.style.backgroundColor = "rgb(0,0,0)";
+        item.style.borderColor = "white";
+    }
 }
 
 function addSquares() {
@@ -18,15 +20,16 @@ function addSquares() {
     for(i=0; i<squaresPerSide*squaresPerSide; i++) {
         let item = document.createElement('div');
         item.classList.add("item");
-        item.id = 'item' + i;
+        item.id = i;
         item.addEventListener("mouseover", onmouseover);
         container.appendChild(item);
+        redDecrement[i] = greenDecrement[i] = blueDecrement[i] = 255;
     }    
 }
 
 function reset() {
     for(i=0; i<squaresPerSide*squaresPerSide; i++) {
-        let item = document.getElementById('item' + i);
+        let item = document.getElementById(i);
         item.removeEventListener("mouseover", onmouseover);
     }
     container.innerHTML = "";
@@ -36,6 +39,7 @@ function reset() {
         squaresPerSide = parseInt(window.prompt("Squares per side (1..." + maxSquaresPerSide + "): ", "16"));
     } while (squaresPerSide <= 0 || squaresPerSide > maxSquaresPerSide);
     
+    redDecrement = greenDecrement = blueDecrement = new Array(squaresPerSide*squaresPerSide);
     addSquares();
 }
 
@@ -43,7 +47,8 @@ let button = document.getElementById('reset'),
     container = document.getElementById('container'),
     containerStyle = container.style,
     side = 0,
-    squaresPerSide = 16;
+    squaresPerSide = 16
+    redDecrement = greenDecrement = blueDecrement = new Array(squaresPerSide*squaresPerSide);
 
 positionContainer();
 button.addEventListener("click", reset);
