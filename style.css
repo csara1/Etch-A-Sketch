@@ -1,11 +1,12 @@
 body {
+    text-align: center;
     margin: 0;
 }
 
 #container {
     background-color: black;
-    margin: auto;
-    position: absolute;
+    margin: 0 auto;
+    position: relative;
     top: 0; left: 0; bottom: 0; right: 0;
     display: grid;
 }

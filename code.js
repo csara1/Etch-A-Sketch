@@ -1,6 +1,9 @@
-function onresize() {
-    side = Math.min(window.innerWidth, window.innerHeight) + "px";
-    containerStyle.width = containerStyle.height = side;
+function positionContainer() {
+    let buttonHeight = button.offsetHeight,
+        windowHeight = window.innerHeight,
+        side = Math.min(window.innerWidth, windowHeight-buttonHeight);
+    button.style.marginTop = (windowHeight-side-buttonHeight)/2 + "px";
+    containerStyle.width = containerStyle.height = side + "px";
 }
 
 function onmouseover(event) {
@@ -9,13 +12,13 @@ function onmouseover(event) {
     itemStyle.borderColor = "black";
 }
 
-let container = document.getElementById('container'),
+let button = document.getElementById('reset'),
+    container = document.getElementById('container'),
     containerStyle = container.style,
-    side = Math.min(window.innerWidth, window.innerHeight) + "px",
     squaresPerSide = 16;
 
-containerStyle.width = containerStyle.height = side;
-window.addEventListener("resize", onresize);
+positionContainer();
+window.addEventListener("resize", positionContainer);
 
 containerStyle.gridTemplateColumns = "repeat(" + squaresPerSide + ", 1fr)";
 containerStyle.gridTemplateRows = "repeat(" + squaresPerSide + ", 1fr)";
